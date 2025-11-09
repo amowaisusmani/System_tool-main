@@ -1,0 +1,22 @@
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall
+
+OBJS = main.o process.o system_monitor.o
+TARGET = system_monitor
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+
+main.o: main.cpp process.h system_monitor.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
+
+process.o: process.cpp process.h
+	$(CXX) $(CXXFLAGS) -c process.cpp
+
+system_monitor.o: system_monitor.cpp system_monitor.h process.h
+	$(CXX) $(CXXFLAGS) -c system_monitor.cpp
+
+clean:
+	rm -f $(OBJS) $(TARGET)
